@@ -1,7 +1,7 @@
 # hct-cam16
 
 [![CI](https://github.com/edgarhsanchez/hct_cam16/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/edgarhsanchez/hct_cam16/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/edgarhsanchez/hct_cam16/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/edgarhsanchez/hct_cam16/actions/workflows/codeql.yml)
+[![CodeQL](https://github.com/edgarhsanchez/hct_cam16/actions/workflows/github-code-scanning/codeql/badge.svg?branch=main)](https://github.com/edgarhsanchez/hct_cam16/actions/workflows/github-code-scanning/codeql)
 [![Crates.io](https://img.shields.io/crates/v/hct-cam16.svg)](https://crates.io/crates/hct-cam16)
 [![Docs.rs](https://docs.rs/hct-cam16/badge.svg)](https://docs.rs/hct-cam16)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)

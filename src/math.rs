@@ -143,7 +143,12 @@ pub(crate) fn y_from_lstar(lstar: f64) -> f64 {
     let ft = (lstar + 16.0) / 116.0;
     let ft3 = ft * ft * ft;
 
-    100.0 * if ft3 > e { ft3 } else { (116.0 * ft - 16.0) / kappa }
+    100.0
+        * if ft3 > e {
+            ft3
+        } else {
+            (116.0 * ft - 16.0) / kappa
+        }
 }
 
 /// Calculate L* (tone) from ARGB

@@ -249,7 +249,7 @@ impl Hct {
     /// Solve for ARGB given HCT values using an iterative solver with gamut mapping.
     fn solve_to_argb(hue: f64, requested_chroma: f64, tone: f64) -> u32 {
         // Edge cases: pure black, white, or achromatic
-        if tone < 0.0001 || tone > 99.9999 || requested_chroma < 0.0001 {
+        if !(0.0001..=99.9999).contains(&tone) || requested_chroma < 0.0001 {
             return argb_from_lstar(tone);
         }
 
@@ -270,9 +270,21 @@ impl Hct {
 
 /// Transformation matrices for CAM16 color space
 const SCALED_DISCOUNT_FROM_LINRGB: [[f64; 3]; 3] = [
-    [0.001200833568784504, 0.002389694492170889, 0.0002795742885861124],
-    [0.0005891086651375999, 0.0029785502573438758, 0.0003270666104008398],
-    [0.00010146692491640572, 0.0005364214359186694, 0.0032979401770712076],
+    [
+        0.001200833568784504,
+        0.002389694492170889,
+        0.0002795742885861124,
+    ],
+    [
+        0.0005891086651375999,
+        0.0029785502573438758,
+        0.0003270666104008398,
+    ],
+    [
+        0.00010146692491640572,
+        0.0005364214359186694,
+        0.0032979401770712076,
+    ],
 ];
 
 const LINRGB_FROM_SCALED_DISCOUNT: [[f64; 3]; 3] = [
@@ -413,7 +425,7 @@ fn set_coordinate(source: [f64; 3], coordinate: f64, target: [f64; 3], axis: usi
 }
 
 fn is_bounded(x: f64) -> bool {
-    0.0 <= x && x <= 100.0
+    (0.0..=100.0).contains(&x)
 }
 
 fn nth_vertex(y: f64, n: usize) -> Option<[f64; 3]> {
@@ -428,17 +440,29 @@ fn nth_vertex(y: f64, n: usize) -> Option<[f64; 3]> {
         let g = coord_a;
         let b = coord_b;
         let r = (y - g * k_g - b * k_b) / k_r;
-        if is_bounded(r) { Some([r, g, b]) } else { None }
+        if is_bounded(r) {
+            Some([r, g, b])
+        } else {
+            None
+        }
     } else if n < 8 {
         let b = coord_a;
         let r = coord_b;
         let g = (y - r * k_r - b * k_b) / k_g;
-        if is_bounded(g) { Some([r, g, b]) } else { None }
+        if is_bounded(g) {
+            Some([r, g, b])
+        } else {
+            None
+        }
     } else {
         let r = coord_a;
         let g = coord_b;
         let b = (y - r * k_r - g * k_g) / k_b;
-        if is_bounded(b) { Some([r, g, b]) } else { None }
+        if is_bounded(b) {
+            Some([r, g, b])
+        } else {
+            None
+        }
     }
 }
 
@@ -480,7 +504,11 @@ fn bisect_to_segment(y: f64, target_hue: f64) -> ([f64; 3], [f64; 3]) {
 }
 
 fn midpoint(a: [f64; 3], b: [f64; 3]) -> [f64; 3] {
-    [(a[0] + b[0]) / 2.0, (a[1] + b[1]) / 2.0, (a[2] + b[2]) / 2.0]
+    [
+        (a[0] + b[0]) / 2.0,
+        (a[1] + b[1]) / 2.0,
+        (a[2] + b[2]) / 2.0,
+    ]
 }
 
 fn critical_plane_below(x: f64) -> i32 {
@@ -553,8 +581,7 @@ fn find_result_by_j(hue_radians: f64, chroma: f64, y: f64) -> Option<u32> {
         let t = (alpha * t_inner_coeff).powf(1.0 / 0.9);
         let ac = vc.aw * j_normalized.powf(1.0 / vc.c / vc.z);
         let p2 = ac / vc.nbb;
-        let gamma = 23.0 * (p2 + 0.305) * t
-            / (23.0 * p1 + 11.0 * t * h_cos + 108.0 * t * h_sin);
+        let gamma = 23.0 * (p2 + 0.305) * t / (23.0 * p1 + 11.0 * t * h_cos + 108.0 * t * h_sin);
         let a = gamma * h_cos;
         let b = gamma * h_sin;
 
