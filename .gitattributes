@@ -1,0 +1,9 @@
+# Ensure consistent line endings across platforms (important for rustfmt --check on Windows)
+* text=auto eol=lf
+
+# Explicitly keep common source/config files as LF
+*.rs text eol=lf
+*.toml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.md text eol=lf

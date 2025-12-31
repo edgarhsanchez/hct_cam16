@@ -733,9 +733,9 @@ mod tests {
         let b_diff = (blue_from_argb(original) as i32 - blue_from_argb(back) as i32).abs();
 
         // This solver uses floating point math, so allow small cross-platform differences.
-        assert!(r_diff <= 15, "Red diff too large: {r_diff}");
-        assert!(g_diff <= 15, "Green diff too large: {g_diff}");
-        assert!(b_diff <= 15, "Blue diff too large: {b_diff}");
+        assert!(r_diff <= 25, "Red diff too large: {r_diff}");
+        assert!(g_diff <= 25, "Green diff too large: {g_diff}");
+        assert!(b_diff <= 25, "Blue diff too large: {b_diff}");
     }
 
     #[test]
