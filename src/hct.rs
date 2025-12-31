@@ -434,7 +434,7 @@ fn nth_vertex(y: f64, n: usize) -> Option<[f64; 3]> {
     let k_b = Y_FROM_LINRGB[2];
 
     let coord_a = if n % 4 <= 1 { 0.0 } else { 100.0 };
-    let coord_b = if n % 2 == 0 { 0.0 } else { 100.0 };
+    let coord_b = if n.is_multiple_of(2) { 0.0 } else { 100.0 };
 
     if n < 4 {
         let g = coord_a;
