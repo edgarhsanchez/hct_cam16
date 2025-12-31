@@ -6,6 +6,15 @@
 [![Docs.rs](https://docs.rs/hct-cam16/badge.svg)](https://docs.rs/hct-cam16)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+## Visual examples
+
+![Theme Colors screenshot 1](assets/See%20the%20pretty%20math1.png)
+![Theme Colors screenshot 2](assets/See%20the%20pretty%20math2.png)
+![Theme Colors screenshot 3](assets/See%20the%20pretty%20math3.png)
+![Theme Colors screenshot 4](assets/See%20the%20pretty%20math4.png)
+![Theme Colors screenshot 5](assets/See%20the%20pretty%20math5.png)
+![Theme Colors screenshot 6](assets/See%20the%20pretty%20math6.png)
+
 `hct-cam16` is a small Rust crate implementing CAM16 + HCT perceptual color math with sRGB/XYZ/L* conversions and a gamut-mapping solver. Designed for deterministic ARGB-in/ARGB-out use, with no UI/engine dependencies.
 
 ## What are CAM16 and HCT?
