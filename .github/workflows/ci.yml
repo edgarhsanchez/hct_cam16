@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "**" ]
   pull_request:
 
 jobs:
@@ -30,3 +30,4 @@ jobs:
 
       - name: Cargo test
         run: cargo test --all-features
+
